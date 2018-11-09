@@ -61,6 +61,8 @@
     <meta name="author" content="templatemo">
 <?php $this->end()?>
 <?php $this->start('css')?>
+    <link href='http://fonts.googleapis.com/css?family=Open+Sans:400,300,400italic,700' rel='stylesheet' type='text/css'>
+
         <link href="/cabinet/css/font-awesome.min.css" rel="stylesheet">
         <link href="/cabinet/css/bootstrap.min.css" rel="stylesheet">
         <link href="/cabinet/css/templatemo-style.css" rel="stylesheet">
