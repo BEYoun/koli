@@ -3,7 +3,7 @@
     {
         var now = new Date();
         if( now.getHours()==0 && now.getMinutes()==0 ) {
-            document.location.href="/mailer_cake/users/sendmail";
+            document.location.href="/cabinet/users/sendmail";
         }
     }
     setInterval(doDate, 60000);
