@@ -158,4 +158,31 @@ class UsersController extends AppController
         
     }
 
+    public function sendmail() {
+        $query = TableRegistry::get('Users')->find();
+        foreach ($query as $article) {
+            $date_rdv = $article->date_rdv;
+            $name = $article->name;
+            $mail = $article->mail;
+            $date_daba = date('U');
+            $date_rdv1 = $date_rdv->format('U');
+            $difference = $date_rdv1 - $date_daba;
+            $limite = 172800;
+            if($difference < $limite) {
+                $subject = 'Rappel pour votre rendez vous';
+                $message = 'Salut '.$name.'! Vous avez un rendez vous avec Dr.Kamal Gynécologue le '.$date_rdv.'.';
+                $mailf = 'medicabinet0@gmail.com';
+                $headers = 'From: ' .$mailf . "\r\n". 
+                        'Reply-To: ' . $mailf. "\r\n" . 
+                        'X-Mailer: PHP/' . phpversion();
+                if (mail($mail, $subject, $message, $headers)) {
+                    echo 'Le rappel est envoyé à '.$name."!<br>";
+                } else {
+                    echo 'Le rappel n\'est pas envoyé!'; 
+                }
+            }
+        }
+        $this->redirect($this->referer());
+    } 
+
 }
