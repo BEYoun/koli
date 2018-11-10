@@ -361,7 +361,7 @@ span.psw {
 
             <li><a href="#"><i class="fa fa-bar-chart fa-fw"></i>Les recettes</a></li>
             
-            <li><a href="login.html"><i class="fa fa-eject fa-fw"></i>Se déconnecter</a></li>
+            <li><a href="#"><i class="fa fa-eject fa-fw"></i>Se déconnecter</a></li>
           </ul>  
         </nav>
       </div>

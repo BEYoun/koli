@@ -298,97 +298,84 @@
                                                     
     </div>
     </section> -->
-  <div class="container">
+    
+  <div class="container" id="R1">
     <br>
     <br>
     <br>
     <br>
-    <div class="row" >
-      
-          
-         <div class="col-md-7">
-
-  <div class="panel panel-default" style="box-shadow: 0 10px 10px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19); ">
-    <div class="panel-heading">  
-
-<button onclick="document.getElementById('id01').style.display='block'" style="width:auto;">modifier</button>
-    </div>
-     <div class="panel-body">
-         
-      <div class="box box-info">
-          
-              <div class="box-body">
-                       <div class="col-sm-6">
-                       <div  align="center"> <img alt="User Pic" src="https://x1.xingassets.com/assets/frontend_minified/img/users/nobody_m.original.jpg" id="profile-image1" class="img-circle img-responsive"> 
-                  
-                  <input id="profile-image-upload" class="hidden" type="file">
-      <div style="color:#999;" >click here to change profile image</div>
-                  <!--Upload Image Js And Css-->
+      <div class="row" id="R2">
+              <div class="col-sm-3"><!--left col-->
+                 <div class="text-center">
+                    <img src="http://ssl.gstatic.com/accounts/ui/avatar_2x.png" class="avatar img-circle img-thumbnail" alt="avatar">
+            
+                  </div>
              
-                
-     
+               </div><!--/col-3-->
+                <div class="col-sm-9" style="text-align: left;">           
+                    
+                      <form class="form" action="#" method="post" id="registrationForm">
+                          <div class="form-group">
+                              
+                              <div class="col-xs-6">
+                                  <label for="first_name"><h4>Prénom :<?=$data['prenom']?></h4></label>
+                                 
+                              </div>
+                          </div>
+                          <div class="form-group">
+                              
+                              <div class="col-xs-6">
+                                <label for="last_name"><h4>Nom : <?=$data['nom']?></h4></label>
+                                 
+                              </div>
+                          </div>
+              
+                          <div class="form-group">
+                              
+                              <div class="col-xs-6">
+                                  <label for="phone"><h4>Fax : <?=$data['tel']?></h4></label>
+                                 
+                              </div>
+                          </div>
+              
+                          <div class="form-group">
+                              <div class="col-xs-6">
+                                 <label for="mobile"><h4>Télephone: <?=$data['tel']?></h4></label>
+                                 
+                              </div>
+                          </div>
+                          <div class="form-group">
+                              
+                              <div class="col-xs-6">
+                                  <label for="email"><h4>Email : <?=$this->request->session()->read('Auth.User.mail')?></h4></label>
+                                 
+                              </div>
+                          </div>
+                          <div class="form-group">
+                              
+                              <div class="col-xs-6">
+                                  <label for="email"><h4>Adresse : <?=$data['adresse']?></h4></label>
+                                  
+                              </div>
+                          </div>
+                          
+                          <div class="form-group">
+                               <div class="col-xs-12">
+                                    <br>
+                                      <button class="btn btn-lg btn-info btn-sm" type="button" onclick="document.getElementById('id01').style.display='block'" style="width:auto;" ><i class="glyphicon glyphicon-ok-sign"></i> Modifier</button>           
+                                </div>
+                          </div>
+                      </form>
                   
                   
-                       
-                       
-                       </div>
-                
-                <br>
-      
-                <!-- /input-group -->
-              </div>
-              <div class="col-sm-6">
-              <h4 style="color:#00b1b1;"><?=$data['nom']?> <?=$data['prenom']?></h4></span>
-                <span><p>Aspirant</p></span>            
-              </div>
-              <div class="clearfix"></div>
-              <hr style="margin:5px 0 5px 0;">
-      
-                
-    <div class="col-sm-5 col-xs-6 tital " >First Name:</div><div class="col-sm-7 col-xs-6 "><?=$data['nom']?></div>
-         <div class="clearfix"></div>
-    <div class="bot-border"></div>
-
-      <div class="clearfix"></div>
-    <div class="bot-border"></div>
-
-    <div class="col-sm-5 col-xs-6 tital " >Last Name:</div><div class="col-sm-7"> <?=$data['prenom']?></div>
-      <div class="clearfix"></div>
-    <div class="bot-border"></div>
-
-    <div class="col-sm-5 col-xs-6 tital " >Date Of Joining:</div><div class="col-sm-7"><?=$data['created']?></div>
-
-      <div class="clearfix"></div>
-    <div class="bot-border"></div>
-
-    <div class="col-sm-5 col-xs-6 tital " >Date Of Birth:</div><div class="col-sm-7">11 Jun 1998</div>
-
-      <div class="clearfix"></div>
-    <div class="bot-border"></div>
-
-    <div class="col-sm-5 col-xs-6 tital " >Place Of Birth:</div><div class="col-sm-7">Shirdi</div>
-
-     <div class="clearfix"></div>
-    <div class="bot-border"></div>
-
-    <div class="col-sm-5 col-xs-6 tital " >Nationality:</div><div class="col-sm-7">Indian</div>
-
-     <div class="clearfix"></div>
-    <div class="bot-border"></div>
-
-    <div class="col-sm-5 col-xs-6 tital " >Relition:</div><div class="col-sm-7">Hindu</div>
+              </div><!--/tab-content-->
+    
+            </div><!--/col-9-->
+        </div><!--/row-->
 
 
-                <!-- /.box-body -->
-              </div>
-              <!-- /.box -->
 
-            </div>
-           
-                
-        </div> 
-        </div>
-  </div>  
+
       <script>
                 $(function() {
       $('#profile-image1').on('click', function() {
@@ -399,7 +386,7 @@
                 
      </div>
   </div>
-  <!DOCTYPE html>
+<!DOCTYPE html>
 <html>
 <head>
 <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -528,32 +515,93 @@ span.psw {
 </head>
 <body>
 
-<div id="id01" class="modal">
+<div id="id01" class="modal" style="width: 100%;text-align: center;padding: 150px;;padding-left: 300px;">
   
-  <form class="modal-content animate" action="/action_page.php">
-    <div class="imgcontainer">
-      <span onclick="document.getElementById('id01').style.display='none'" class="close" title="Close Modal">&times;</span>
-      <img src="img_avatar2.png" alt="Avatar" class="avatar">
-    </div>
-
-    <div class="container">
-      <label for="uname"><b>Username</b></label>
-      <input type="text" placeholder="Enter Username" name="uname" required>
-
-      <label for="psw"><b>Password</b></label>
-      <input type="password" placeholder="Enter Password" name="psw" required>
-        
-      <button type="submit">Login</button>
-      <label>
-        <input type="checkbox" checked="checked" name="remember"> Remember me
-      </label>
-    </div>
-
-    <div class="container" style="background-color:#f1f1f1">
-      <button type="button" onclick="document.getElementById('id01').style.display='none'" class="cancelbtn">Cancel</button>
-      <span class="psw">Forgot <a href="#">password?</a></span>
-    </div>
-  </form>
+  <div class="row" style="background:white;border: 1px black solid;padding-left:200px;width: 1000px; margin-bottom: 50px;">
+                        <form class="form" action="#" method="post" id="registrationForm" class="col-sm-8">
+                            <div class="col-sm-4"><!--left col-->   
+                                   <div class="text-center">
+                                      <img src="http://ssl.gstatic.com/accounts/ui/avatar_2x.png" class="avatar img-circle img-thumbnail" alt="avatar">
+                                      <h6>Ajouter une autre image ...</h6>
+                                      <input type="file" class="text-center center-block file-upload" placeholder="choisir un fichier ">
+                                  </div>
+                                </div>
+                            <div class="row">
+                                <div class="col-sm-8">           
+                                      <div class="t">
+                                         <div class="tab-pane active" id="home">
+                                     <hr>
+                              
+                                  <div class="form-group">
+                                      
+                                      <div style="margin-top:1%" class="col-xs-6">
+                                        
+                                          <input type="text" class="form-control" name="first_name" id="first_name" value="<?=$data['prenom']?>" title="enter your first name if any.">
+                                      </div>
+                                  </div>
+                                  <div class="form-group">
+                                      
+                                      <div style="margin-top:1%"  class="col-xs-6">
+                                        
+                                          <input type="text" class="form-control" name="last_name" id="last_name" value="<?=$data['nom']?>" title="enter your last name if any.">
+                                      </div>
+                                  </div>
+                      
+                                  <div class="form-group">
+                                      
+                                      <div style="margin-top:1%"  class="col-xs-6">
+                                         
+                                          <input type="text" class="form-control" name="phone" id="phone" value="<?=$data['tel']?>" title="enter your phone number if any.">
+                                      </div>
+                                  </div>
+                      
+                                  <div class="form-group">
+                                      <div style="margin-top:1%"  class="col-xs-6">
+                                        
+                                          <input type="text" class="form-control" name="mobile" id="mobile" value="<?=$data['tel']?>" title="enter your mobile number if any.">
+                                      </div>
+                                  </div>
+                                  <div class="form-group">
+                                      
+                                      <div style="margin-top:1%"  class="col-xs-6">
+                                        
+                                          <input type="email" class="form-control" name="email" id="email" value="<?=$this->request->session()->read('Auth.User.mail')?>" title="enter your email.">
+                                      </div>
+                                  </div>
+                                  <div  class="form-group">
+                                      
+                                      <div style="margin-top:1%" class="col-xs-6">
+                                    
+                                          <input type="email" class="form-control" id="location" value="<?=$data['adresse']?>" title="enter a location">
+                                      </div>
+                                  </div>
+                                  <div class="form-group">
+                                      
+                                      <div style="margin-top:1%" class="col-xs-6">
+                                          <label>mdp</label>
+                                          <input type="password" class="form-control" name="password" id="password"  title="enter your password.">
+                                      </div>
+                                  </div>
+                                  <div class="form-group">
+                                      
+                                      <div  style="margin-top:1%" class="col-xs-6">
+                                          <label>confirmer mdp</label>
+                                          <input type="password" class="form-control" name="password2" id="password2" title="enter your password2.">
+                                      </div>
+                                  </div>
+                                  <div class="form-group">
+                                       <div style="margin:1% 0% 1% 0%" class="col-xs-8">
+                                            <br>
+                                              <button class="btn btn-lg btn-info" type="submit"><i class="glyphicon glyphicon-ok-sign"></i> Enregistrer</button>           
+                                        </div>
+                                  </div>
+                              </form>
+                          
+                          <hr>
+                      </div><!--/tab-content-->
+            
+                    </div><!--/col-9-->
+                </div><!--/row-->
 </div>
 
 <script>

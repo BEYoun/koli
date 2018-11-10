@@ -127,12 +127,18 @@ class PatientsController extends AppController
         return $this->redirect(['action' => 'index']);
     }
     public function acceuil(){
-
+       /* debug($this->request->session()->read('Auth.User.id'));
+            die();*/
         $data=$this->Patients
             ->find('all')
             ->where(['users_id ='=>$this->request->params['?']['id']])->first();
         //$user=$this->Users->find('all')->where(['id ='=>$this->request->params['?']['id']]);
         $this->set(compact('data'/*,'user'*/));  
+    }
+    public function initialize()
+    {
+        parent::initialize();
+        $this->Auth->allow(['index']);
     }
     
 }

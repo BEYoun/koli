@@ -131,7 +131,7 @@ class UsersController extends AppController
     {
         
             $user = $this->Auth->identify();
-
+            
             if ($user) {
                 $this->Auth->setUser($user);
                 $id= $this
