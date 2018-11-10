@@ -161,7 +161,7 @@
                                     echo $this->Form->control('prenom',['label'=>false,'class'=>'form-control form-white','placeholder'=>'prenom']);
                                     echo $this->Form->control('tel',['label'=>false,'class'=>'form-control form-white','placeholder'=>'telephone']);
                                     echo $this->Form->control('adresse',['label'=>false,'class'=>'form-control form-white','placeholder'=>'adresse']);
-                                    echo $this->Form->control('photo',['label'=>false,'class'=>'form-control form-white','placeholder'=>'photo']);
+                                    
                                 ?>
                                 <?= $this->Form->button(__('Submit'),['class'=>'btn btn-submit btn-info']) ?>
                                 <?= $this->Form->end() ?>

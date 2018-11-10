@@ -1,5 +1,6 @@
 <?php $this->layout='acceuil';?>
 <?php $this->start('script')?>
+<?php  ?>
 <script>
 
     $(document).ready(function() {
@@ -7,41 +8,41 @@
         var d = date.getDate();
         var m = date.getMonth();
         var y = date.getFullYear();
-        
+
         /*  className colors
-        
+
         className: default(transparent), important(red), chill(pink), success(green), info(blue)
-        
-        */      
-        
-          
+
+        */
+
+
         /* initialize the external events
         -----------------------------------------------------------------*/
-    
+
         $('#external-events div.external-event').each(function() {
-        
+
             // create an Event Object (http://arshaw.com/fullcalendar/docs/event_data/Event_Object/)
             // it doesn't need to have a start or end
             var eventObject = {
                 title: $.trim($(this).text()) // use the element's text as the event title
             };
-            
+
             // store the Event Object in the DOM element so we can get to it later
             $(this).data('eventObject', eventObject);
-            
+
             // make the event draggable using jQuery UI
             $(this).draggable({
                 zIndex: 999,
                 revert: true,      // will cause the event to go back to its
                 revertDuration: 0  //  original position after the drag
             });
-            
+
         });
-    
-    
+
+
         /* initialize the calendar
         -----------------------------------------------------------------*/
-        
+
         var calendar =  $('#calendar').fullCalendar({
             header: {
                 left: 'title',
@@ -52,7 +53,7 @@
             firstDay: 1, //  1(Monday) this can be changed to 0(Sunday) for the USA system
             selectable: true,
             defaultView: 'month',
-            
+
             axisFormat: 'h:mm',
             columnFormat: {
                 month: 'ddd',    // Mon
@@ -84,32 +85,32 @@
             },
             droppable: true, // this allows things to be dropped onto the calendar !!!
             drop: function(date, allDay) { // this function is called when something is dropped
-            
+
                 // retrieve the dropped element's stored Event Object
                 var originalEventObject = $(this).data('eventObject');
-                
+
                 // we need to copy it, so that multiple events don't have a reference to the same object
                 var copiedEventObject = $.extend({}, originalEventObject);
-                
+
                 // assign it the date that was reported
                 copiedEventObject.start = date;
                 copiedEventObject.allDay = allDay;
-                
+
                 // render the event on the calendar
                 // the last `true` argument determines if the event "sticks" (http://arshaw.com/fullcalendar/docs/event_rendering/renderEvent/)
                 $('#calendar').fullCalendar('renderEvent', copiedEventObject, true);
-                
+
                 // is the "remove after drop" checkbox checked?
                 if ($('#drop-remove').is(':checked')) {
                     // if so, remove the element from the "Draggable Events" list
                     $(this).remove();
                 }
-                
+
             },
-            
+
             events: [
 
-                
+
                 /*{
                     title: 'All Day Event',
                     start: new Date(y, m, 1)
@@ -121,60 +122,33 @@
                     allDay: false,
                     className: 'info'
                 },
-                {
-                    id: 999,
-                    title: 'Repeating Event',
-                    start: new Date(y, m, d+4, 16, 0),
-                    allDay: false,
-                    className: 'info'
-                },
-                {
-                    title: 'Meeting',
-                    start: new Date(y, m, d, 10, 30),
-                    allDay: false,
-                    className: 'important'
-                },
-                {
-                    title: 'Lunch',
-                    start: new Date(y, m, d, 12, 0),
-                    end: new Date(y, m, d, 14, 0),
-                    allDay: false,
-                    className: 'important'
-                },
-                {
-                    title: 'Birthday Party',
-                    start: new Date(y, m, d+1, 19, 0),
-                    end: new Date(y, m, d+1, 22, 30),
-                    allDay: false,
-                },
-                {
-                    title: 'Click for Google',
-                    start: new Date(y, m, 28),
-                    end: new Date(y, m, 29),
-                    url: 'http://google.com/',
-                    className: 'success'
-                }*/
-            ],          
+                */
+            ],
         });
-        
-        
+
+
     });
 </script>
 <?php $this->end()?>
+<style type="text/css">
+  body{
+    background-color: #D8D8D8;
+  }
+</style>
 <script>
     function agenda(){
-        document.getElementById("agenda").style.display = "block";  
-        document.getElementById("profile").style.display = "none";  
-        document.getElementById("dossier").style.display = "none";  
+        document.getElementById("agenda").style.display = "block";
+        document.getElementById("profile").style.display = "none";
+        document.getElementById("dossier").style.display = "none";
     }
     function profile(){
-        document.getElementById("agenda").style.display = "none";  
-        document.getElementById("profile").style.display = "block";  
+        document.getElementById("agenda").style.display = "none";
+        document.getElementById("profile").style.display = "block";
         document.getElementById("dossier").style.display = "none";
     }
     function dossier(){
-        document.getElementById("agenda").style.display = "none";  
-        document.getElementById("profile").style.display = "none";  
+        document.getElementById("agenda").style.display = "none";
+        document.getElementById("profile").style.display = "none";
         document.getElementById("dossier").style.display = "block";
     }
 </script>
@@ -204,189 +178,117 @@
         <div style='clear:both'></div>
     </div>
 </div>
-
+<div id="dossier" style="display: none;">
+  <br>
+    <section style="padding-top: 100px" class="container">
+    <table class="table">
+        <thead >
+          <tr class="table-primary">
+            <th style="text-align: center;">Date de visite </th>
+            <th style="text-align: center;">Ordonance</th>
+            <th style="text-align: center;">Analyse </th>
+            <th style="text-align: center;">Remarques </th>
+          </tr>
+        </thead>
+        <tbody>
+        <tr >
+            <td>20/05/1994</td>
+            <td>5 midico 54 5 midico 94 <br> <button type="button" class="btn btn-info" style="width: 150Px">Imprimer </button> </td>
+            <td><p>alpha 54</p> <button type="button" class="btn btn-info" style="width: 150Px">Imprimer </button></td>
+            <td>Mola7ada</td>
+        </tr>
+        </tbody>
+      </table>
+    </section>
+</div>
 <div id="profile" style="display: none;">
-    <!-- <section style="padding-top:20px ">
-    <hr><br>
-    <div class="container bootstrap snippet">
     
-    <div class="row">
-        <div class="col-sm-3">
-              
+  <div class="container" style="margin:0 25%">
+    <br>
+    <br>
+    <br>
+    <br>
+    <div class="row" >
 
-      <div class="text-center">
-        <img src="http://ssl.gstatic.com/accounts/ui/avatar_2x.png" class="avatar img-circle img-thumbnail" alt="avatar">
-        <h6>Ajouter une autre image ...</h6>
-        <input type="file" class="text-center center-block file-upload">
-      </div>
-    </hr><br>     
-        </div>
-        <div class="col-sm-9">           
-          <div class="tab-content">
-            <div class="tab-pane active" id="home">
-                <hr>
-                    <?= $this->Form->create(null,['url'=>['controller'=>'users','action'=>'add'],'class'=>'form','id'=>'registrationForm']) ?>
-                      <div class="form-group">
-                          <div class="col-xs-6">
-                              <label for="first_name"><h4>Prénom :</h4></label>
-                              <input type="text" class="form-control" name="first_name" id="first_name" placeholder="<?=$data['prenom']?> " title="enter your first name if any.">
-                          </div>
-                      </div>
-                      <div class="form-group">
-                          
-                          <div class="col-xs-6">
-                            <label for="last_name"><h4>Nom :</h4></label>
-                              <input type="text" class="form-control" name="last_name" id="last_name" placeholder="<?=$data['nom']?>" title="enter your last name if any.">
-                          </div>
-                      </div>
-          
-                      <div class="form-group">
-                          
-                          <div class="col-xs-6">
-                              <label for="phone"><h4>Fax : </h4></label>
-                              <input type="text" class="form-control" name="phone" id="phone" placeholder="<?=$data['tel']?>  " title="enter your phone number if any.">
-                          </div>
-                      </div>
-          
-                      <div class="form-group">
-                          <div class="col-xs-6">
-                             <label for="mobile"><h4>Télephone:</h4></label>
-                              <input type="text" class="form-control" name="mobile" id="mobile" placeholder="<?=$data['tel']?>" title="enter your mobile number if any.">
-                          </div>
-                      </div>
-                      <div class="form-group">
-                          
-                          <div class="col-xs-6">
-                              <label for="email"><h4>Email</h4></label>
-                              <input type="email" class="form-control" name="email" id="email" placeholder="<?=$data['mail']?>" title="enter your email.">
-                          </div>
-                      </div>
-                      <div class="form-group">
-                          
-                          <div class="col-xs-6">
-                              <label for="email"><h4>Adresse :</h4></label>
-                              <input type="email" class="form-control" id="location" placeholder="<?=$data['adresse']?>" title="enter a location">
-                          </div>
-                      </div>
-                      <div class="form-group">
-                          
-                          <div class="col-xs-6">
-                              <label for="password"><h4>Mot de passe :</h4></label>
-                              <input type="password" class="form-control" name="password" id="password" placeholder="Mot de passe 1 " title="enter your password.">
-                          </div>
-                      </div>
-                      <div class="form-group">
-                          
-                          <div class="col-xs-6">
-                            <label for="password2"><h4>Verifier </h4></label>
-                              <input type="password" class="form-control" name="password2" id="password2" placeholder="Mot de passe 2" title="enter your password2.">
-                          </div>
-                      </div>
-                      <div class="form-group">
-                           <div class="col-xs-12">
-                                <br>
-                                <button class="btn btn-lg btn-info" type="submit"><i class="glyphicon glyphicon-ok-sign"></i> Enregistrer</button>           
-                            </div>
-                      </div>
-                </form>
-              
-              <hr>
-          </div>
+
+         <div class="col-md-7">
+
+  <div class="panel panel-default" style="box-shadow: 0 10px 10px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19); ">
+    <div class="panel-heading">
+
+<button onclick="document.getElementById('id01').style.display='block'" style="width:40%" class="btn btn-success">Modifier</button>
+    </div>
+     <div class="panel-body">
+
+      <div class="box box-info">
+
+              <div class="box-body">
+                       <div class="col-sm-6">
+                       <div  aligne="center"> <img alt="User Pic" src="<?= $data['photo'] ?>" id="profile-image1" class="img-circle img-responsive">
+
+                       </div>
+
+                <br>
+                <!-- /input-group -->
+              </div>
+              <div class="col-sm-6">
+              <h4 style="color:#00b1b1;"><?=$data['nom']?> <?=$data['prenom']?></h4></span>
+                <span><p><?=$this->request->session()->read('Auth.User.type')?></p></span>
+              </div>
+              <div class="clearfix"></div>
+              <hr style="margin:5px 0 5px 0;">
+
+
+    <div class="col-sm-5 col-xs-6 tital " >Nom :</div><div class="col-sm-7 col-xs-6 "><?=$data['nom']?></div>
+         <div class="clearfix"></div>
+    <div class="bot-border"></div>
+
+      <div class="clearfix"></div>
+    <div class="bot-border"></div>
+
+    <div class="col-sm-5 col-xs-6 tital " >Prénom :</div><div class="col-sm-7"> <?=$data['prenom']?></div>
+      <div class="clearfix"></div>
+    <div class="bot-border"></div>
+
+
+    <div class="col-sm-5 col-xs-6 tital " >Télephone :</div><div class="col-sm-7"><?=$data['tel']?></div>
+
+      <div class="clearfix"></div>
+    <div class="bot-border"></div>
+
+  <div class="col-sm-5 col-xs-6 tital " >Adresse :</div><div class="col-sm-7"><?=$data['adresse']?></div>
+
+
+  <div class="col-sm-5 col-xs-6 tital " >Email:</div><div class="col-sm-7"><?=$this->request->session()->read('Auth.User.mail')?></div>
+
+
+     <div class="clearfix"></div>
+    <div class="bot-border"></div>
+
+
+
+
+                <!-- /.box-body -->
+              </div>
+              <!-- /.box -->
+
+            </div>
+
 
         </div>
-    </div>
-                                                    
-    </div>
-    </section> -->
-    
-  <div class="container" id="R1">
-    <br>
-    <br>
-    <br>
-    <br>
-      <div class="row" id="R2">
-              <div class="col-sm-3"><!--left col-->
-                 <div class="text-center">
-                    <img src="http://ssl.gstatic.com/accounts/ui/avatar_2x.png" class="avatar img-circle img-thumbnail" alt="avatar">
-            
-                  </div>
-             
-               </div><!--/col-3-->
-                <div class="col-sm-9" style="text-align: left;">           
-                    
-                      <form class="form" action="#" method="post" id="registrationForm">
-                          <div class="form-group">
-                              
-                              <div class="col-xs-6">
-                                  <label for="first_name"><h4>Prénom :<?=$data['prenom']?></h4></label>
-                                 
-                              </div>
-                          </div>
-                          <div class="form-group">
-                              
-                              <div class="col-xs-6">
-                                <label for="last_name"><h4>Nom : <?=$data['nom']?></h4></label>
-                                 
-                              </div>
-                          </div>
-              
-                          <div class="form-group">
-                              
-                              <div class="col-xs-6">
-                                  <label for="phone"><h4>Fax : <?=$data['tel']?></h4></label>
-                                 
-                              </div>
-                          </div>
-              
-                          <div class="form-group">
-                              <div class="col-xs-6">
-                                 <label for="mobile"><h4>Télephone: <?=$data['tel']?></h4></label>
-                                 
-                              </div>
-                          </div>
-                          <div class="form-group">
-                              
-                              <div class="col-xs-6">
-                                  <label for="email"><h4>Email : <?=$this->request->session()->read('Auth.User.mail')?></h4></label>
-                                 
-                              </div>
-                          </div>
-                          <div class="form-group">
-                              
-                              <div class="col-xs-6">
-                                  <label for="email"><h4>Adresse : <?=$data['adresse']?></h4></label>
-                                  
-                              </div>
-                          </div>
-                          
-                          <div class="form-group">
-                               <div class="col-xs-12">
-                                    <br>
-                                      <button class="btn btn-lg btn-info btn-sm" type="button" onclick="document.getElementById('id01').style.display='block'" style="width:auto;" ><i class="glyphicon glyphicon-ok-sign"></i> Modifier</button>           
-                                </div>
-                          </div>
-                      </form>
-                  
-                  
-              </div><!--/tab-content-->
-    
-            </div><!--/col-9-->
-        </div><!--/row-->
-
-
-
-
+        </div>
+  </div>
       <script>
                 $(function() {
       $('#profile-image1').on('click', function() {
           $('#profile-image-upload').click();
       });
-  });       
-                </script> 
-                
+  });
+                </script>
+
      </div>
   </div>
-<!DOCTYPE html>
+  <!DOCTYPE html>
 <html>
 <head>
 <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -466,7 +368,7 @@ span.psw {
     background-color: #fefefe;
     margin: 5% auto 15% auto; /* 5% from the top, 15% from the bottom and centered */
     border: 1px solid #888;
-    width: 80%; /* Could be more or less, depending on screen size */
+    width: 60%; /* Could be more or less, depending on screen size */
 }
 
 /* The Close Button (x) */
@@ -492,12 +394,12 @@ span.psw {
 }
 
 @-webkit-keyframes animatezoom {
-    from {-webkit-transform: scale(0)} 
+    from {-webkit-transform: scale(0)}
     to {-webkit-transform: scale(1)}
 }
-    
+
 @keyframes animatezoom {
-    from {transform: scale(0)} 
+    from {transform: scale(0)}
     to {transform: scale(1)}
 }
 
@@ -515,93 +417,101 @@ span.psw {
 </head>
 <body>
 
-<div id="id01" class="modal" style="width: 100%;text-align: center;padding: 150px;;padding-left: 300px;">
-  
-  <div class="row" style="background:white;border: 1px black solid;padding-left:200px;width: 1000px; margin-bottom: 50px;">
-                        <form class="form" action="#" method="post" id="registrationForm" class="col-sm-8">
-                            <div class="col-sm-4"><!--left col-->   
+<div id="id01" class="modal">
+  <div class="modal-content animate" action="/action_page.php">
+      <section >
+                         <div class="container bootstrap snippet">
+
+                             <div class="row">
+                                <?= $this->Form->create(null, ['type'=>'file','url'=>['action'=>'edit'],'class'=>'form','class'=>'col-sm-8','id'=>'registrationForm']) ?>
+                               <div class="col-sm-4" style="margin:0 15%"><!--left col-->
                                    <div class="text-center">
-                                      <img src="http://ssl.gstatic.com/accounts/ui/avatar_2x.png" class="avatar img-circle img-thumbnail" alt="avatar">
+                                      <img src="<?= $data['photo'] ?>" class="avatar img-circle img-thumbnail" alt="avatar">
                                       <h6>Ajouter une autre image ...</h6>
-                                      <input type="file" class="text-center center-block file-upload" placeholder="choisir un fichier ">
+                                      <?php echo $this->Form->control('photo',['type'=>'file','label'=>false,'class'=>'text-center center-block file-upload','placeholder'=>'choisir un fichier','value'=>$data['photo']]); ?>
                                   </div>
                                 </div>
+
+                             </div>
                             <div class="row">
-                                <div class="col-sm-8">           
+                                <div class="col-sm-8">
                                       <div class="t">
                                          <div class="tab-pane active" id="home">
                                      <hr>
-                              
                                   <div class="form-group">
-                                      
+
                                       <div style="margin-top:1%" class="col-xs-6">
-                                        
-                                          <input type="text" class="form-control" name="first_name" id="first_name" value="<?=$data['prenom']?>" title="enter your first name if any.">
+                                          <?php echo $this->Form->control('prenom',['type'=>'text','label'=>false,'class'=>'form-control','value'=>$data['prenom'],'title'=>'enter your first name if any.','name'=>'prenom','id'=>'first_name']); ?>
                                       </div>
                                   </div>
                                   <div class="form-group">
-                                      
+
                                       <div style="margin-top:1%"  class="col-xs-6">
-                                        
-                                          <input type="text" class="form-control" name="last_name" id="last_name" value="<?=$data['nom']?>" title="enter your last name if any.">
+                                          <?php echo $this->Form->control('nom',['type'=>'text','label'=>false,'class'=>'form-control','value'=>$data['nom'],'title'=>'enter your last name if any.','name'=>'nom','id'=>'last_name']); ?>
                                       </div>
                                   </div>
-                      
-                                  <div class="form-group">
-                                      
-                                      <div style="margin-top:1%"  class="col-xs-6">
-                                         
-                                          <input type="text" class="form-control" name="phone" id="phone" value="<?=$data['tel']?>" title="enter your phone number if any.">
-                                      </div>
-                                  </div>
-                      
+
+
+
                                   <div class="form-group">
                                       <div style="margin-top:1%"  class="col-xs-6">
-                                        
-                                          <input type="text" class="form-control" name="mobile" id="mobile" value="<?=$data['tel']?>" title="enter your mobile number if any.">
+                                          <?php echo $this->Form->control('tel',['type'=>'text','label'=>false,'class'=>'form-control','value'=>$data['tel'],'title'=>'enter your mobile number if any.','name'=>'tel','id'=>'mobile']); ?>
+                                          
                                       </div>
                                   </div>
                                   <div class="form-group">
-                                      
+
                                       <div style="margin-top:1%"  class="col-xs-6">
-                                        
-                                          <input type="email" class="form-control" name="email" id="email" value="<?=$this->request->session()->read('Auth.User.mail')?>" title="enter your email.">
+                                          <?php echo $this->Form->control('fax',['type'=>'text','label'=>false,'class'=>'form-control','value'=>$data['tel'],'title'=>'enter your fax.','name'=>'fax','id'=>'fax']); ?>
+                                          
                                       </div>
                                   </div>
                                   <div  class="form-group">
-                                      
-                                      <div style="margin-top:1%" class="col-xs-6">
-                                    
-                                          <input type="email" class="form-control" id="location" value="<?=$data['adresse']?>" title="enter a location">
+
+                                      <div style="margin-top:1%" class="col-xs-12">
+                                          <?php echo $this->Form->control('mail',['type'=>'email','label'=>false,'class'=>'form-control','value'=>$this->request->session()->read('Auth.User.mail'),'title'=>'enter your email.','name'=>'mail','id'=>'mail']); ?>
                                       </div>
                                   </div>
                                   <div class="form-group">
-                                      
+
                                       <div style="margin-top:1%" class="col-xs-6">
-                                          <label>mdp</label>
-                                          <input type="password" class="form-control" name="password" id="password"  title="enter your password.">
+
+                                          <?php echo $this->Form->control('password',['type'=>'password','label'=>'ancien mdp','class'=>'form-control','title'=>'enter your password.','name'=>'password','id'=>'password']); ?>
                                       </div>
                                   </div>
                                   <div class="form-group">
-                                      
+
                                       <div  style="margin-top:1%" class="col-xs-6">
-                                          <label>confirmer mdp</label>
-                                          <input type="password" class="form-control" name="password2" id="password2" title="enter your password2.">
+
+                                          
+                                           <?php echo $this->Form->input('password_nv',['type'=>'password','label'=>'new mdp','class'=>'form-control','title'=>'enter your password.','name'=>'password','id'=>'password']); ?>
                                       </div>
                                   </div>
                                   <div class="form-group">
-                                       <div style="margin:1% 0% 1% 0%" class="col-xs-8">
-                                            <br>
-                                              <button class="btn btn-lg btn-info" type="submit"><i class="glyphicon glyphicon-ok-sign"></i> Enregistrer</button>           
-                                        </div>
+                              <?php echo $this->Form->control('users_id', ['value' => $data['users_id'],'type'=>'Hidden','label'=>false]); ?>
+                              <?php echo $this->Form->control('id', ['value' => $data['id'],'type'=>'Hidden','label'=>false]); ?>
+
+                                     <div  style="margin-top:1%" class="col-xs-6">
+                                              
+                                              <?= $this->Form->button(__('Submit'),['type'=>'submit','class'=>'btn btn-lg btn-info']) ?>
+                                     </div>
                                   </div>
-                              </form>
-                          
+                                  <div class="form-group">
+                                      <div  style="margin-top:1%" class="col-xs-6">
+                                              <button type="button" onclick="document.getElementById('id01').style.display='none'" class="btn btn-lg btn-danger" >Cancel</button>
+                                     </div>
+
+                                  </div>
+
+                            <?php ?><?= $this->Form->end() ?>
+
                           <hr>
                       </div><!--/tab-content-->
-            
+
                     </div><!--/col-9-->
                 </div><!--/row-->
+
+
 </div>
 
 <script>
@@ -621,26 +531,4 @@ window.onclick = function(event) {
 
 </div>
 
-<div id="dossier" style="display: none;">
-  <br>
-    <section style="padding-top: 100px" class="container">
-    <table class="table">
-        <thead >
-          <tr class="table-primary">
-            <th style="text-align: center;">Date de visite </th>
-            <th style="text-align: center;">Ordonance</th>
-            <th style="text-align: center;">Analyse </th>
-            <th style="text-align: center;">Remarques </th>
-          </tr>
-        </thead>
-        <tbody>
-        <tr >
-            <td>20/05/1994</td>
-            <td>5 midico 54 5 midico 94 <br> <button type="button" class="btn btn-info" style="width: 150Px">Imprimer </button> </td>
-            <td><p>alpha 54</p> <button type="button" class="btn btn-info" style="width: 150Px">Imprimer </button></td>
-            <td>Mola7ada</td>
-        </tr>
-        </tbody>
-      </table>
-    </section>
-</div>
+

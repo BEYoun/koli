@@ -2,6 +2,7 @@
 namespace App\Controller;
 
 use App\Controller\AppController;
+use Cake\Routing\Router;
 
 /**
  * Patients Controller
@@ -91,10 +92,42 @@ class PatientsController extends AppController
      */
     public function edit($id = null)
     {
-        $patient = $this->Patients->get($id, [
+        $patient = $this->Patients->get($this->request->data['id'], [
             'contain' => []
         ]);
+        echo $this->request->data['id'];
         if ($this->request->is(['patch', 'post', 'put'])) {
+            if($this->request->data['photo']['name']==''){
+                $t=$this->Patients->find()->where(['id ='=>$this->request->data['id']])->first();
+                $this->request->data['photo']=$t['photo'];
+                $patients = $this->Patients->patchEntity($patient, $this->request->getData());
+                if ($this->Patients->save($patient)) {
+                    $this->Flash->success(__('The patient has been saved.'));
+
+                    return $this->redirect($this->referer());
+                }
+                debug($patients);
+            }else{
+                $filename=$this->request->data['photo']['name'];
+                $url = '/cabinet/img/'.$filename;
+                $uploadpath='img/';
+                $uploadfile=$uploadpath.$filename;
+                if(move_uploaded_file($this->request->data['photo']['tmp_name'], $uploadfile)){
+                    $this->request->data['photo']=$url;
+                    $patients = $this->Patients->patchEntity($patient, $this->request->getData());
+                if ($this->Patients->save($patient)) {
+                    $this->Flash->success(__('The patient has been saved.'));
+
+                    return $this->redirect($this->referer());
+                }
+                }
+                debug($url);
+                
+            }
+        }
+        debug($this->request);
+        die();
+        /*if ($this->request->is(['patch', 'post', 'put'])) {
             $patient = $this->Patients->patchEntity($patient, $this->request->getData());
             if ($this->Patients->save($patient)) {
                 $this->Flash->success(__('The patient has been saved.'));
@@ -104,7 +137,7 @@ class PatientsController extends AppController
             $this->Flash->error(__('The patient could not be saved. Please, try again.'));
         }
         $users = $this->Patients->Users->find('list', ['limit' => 200]);
-        $this->set(compact('patient', 'users'));
+        $this->set(compact('patient', 'users'));*/
     }
 
     /**
@@ -127,8 +160,8 @@ class PatientsController extends AppController
         return $this->redirect(['action' => 'index']);
     }
     public function acceuil(){
-       /* debug($this->request->session()->read('Auth.User.id'));
-            die();*/
+           /* debug($this->request->session()->read('Auth.User.id'));
+                die();*/
         $data=$this->Patients
             ->find('all')
             ->where(['users_id ='=>$this->request->params['?']['id']])->first();
