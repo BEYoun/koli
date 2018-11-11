@@ -2,6 +2,8 @@
 namespace App\Controller;
 
 use App\Controller\AppController;
+use Cake\ORM\TableRegistry;
+use Cake\Mailer\Email;
 
 /**
  * Users Controller
@@ -12,7 +14,7 @@ use App\Controller\AppController;
  */
 class UsersController extends AppController
 {
-
+    public $components= array('Email');
     /**
      * Index method
      *
@@ -57,7 +59,6 @@ class UsersController extends AppController
                 $prenom=$this->request->data['prenom'];
                 $tel=$this->request->data['tel'];
                 $adresse=$this->request->data['adresse'];
-                $photo=$this->request->data['photo'];
 
                 $id = $this
                     ->Users
@@ -73,8 +74,7 @@ class UsersController extends AppController
                             'id'=>$id['id'],
                             'prenom'=>$prenom,
                             'tel'=>$tel,
-                            'adresse'=>$adresse,
-                            'photo'=>$photo
+                            'adresse'=>$adresse
                         ]
                     ]);
             }
@@ -157,5 +157,50 @@ class UsersController extends AppController
         return $this->redirect($this->referer());
         
     }
+
+    public function sendmail() {
+        $query = TableRegistry::get('RendezVous')->find('all');
+        
+
+        foreach ($query as $article) {
+            $date_rdv = $article->date_rdv;
+            $type = $article->type;
+            $pid = $article->patients_id;
+            $nom = TableRegistry::get('Patients')
+                ->find()
+                ->select(['nom'])
+                ->where(['id =' => $pid])
+                ->first();
+            $prenom = TableRegistry::get('Patients')
+                ->find()
+                ->select(['prenom'])
+                ->where(['id =' => $pid])
+                ->first();
+            $fullName = $nom['nom'].' '.$prenom['prenom'];
+            $mail = TableRegistry::get('Users')
+                ->find()
+                ->select(['mail'])
+                ->where(['id =' => $pid])
+                ->first();
+           
+            $date_daba = date('U');
+            $date_rdv1 = $date_rdv->format('U');
+            $difference = $date_rdv1 - $date_daba;
+            $limite = 172800;
+            
+            if($difference < $limite) {
+                $subject = 'Rappel pour votre rendez vous';
+                $message = 'Salut '.$fullName.'!<br>Vous avez un rendez vous avec Dr.Kamal Gynécologue le '.$date_rdv.'.<br>Veillez confirmer votre présence!<br>Tél : 0526294629';
+                $mailf = 'medicabinet0@gmail.com';
+                $headers = 'From: ' .$mailf . "\r\n". 
+                        'Reply-To: ' . $mailf. "\r\n" . 
+                        'X-Mailer: PHP/' . phpversion();
+                $mail = $this->Email->send_mail($mail['mail'],$subject,$message);
+                print_r($mail);
+            }
+        }
+        $this->redirect($this->referer());
+        //die();
+    } 
 
 }

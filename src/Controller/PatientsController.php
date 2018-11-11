@@ -57,9 +57,7 @@ class PatientsController extends AppController
         $patient['prenom']=$this->request->query['prenom'];
         $patient['users_id']=$this->request->query['id'];
         $patient['adresse']=$this->request->query['adresse'];
-        $patient['photo']=$this->request->query['photo'];
         $patient['tel']=$this->request->query['tel'];
-
         $patient = $this->Patients->patchEntity($patient, $this->request->getData());
             debug($patient);
             if ($this->Patients->save($patient)) {
@@ -114,14 +112,14 @@ class PatientsController extends AppController
                 $uploadfile=$uploadpath.$filename;
                 if(move_uploaded_file($this->request->data['photo']['tmp_name'], $uploadfile)){
                     $this->request->data['photo']=$url;
-                    $patients = $this->Patients->patchEntity($patient, $this->request->getData());
-                if ($this->Patients->save($patient)) {
-                    $this->Flash->success(__('The patient has been saved.'));
+                    $patient = $this->Patients->patchEntity($patient, $this->request->getData());
+                    if ($this->Patients->save($patient)) {
+                        $this->Flash->success(__('The patient has been saved.'));
 
-                    return $this->redirect($this->referer());
+                        return $this->redirect($this->referer());
+                    }
                 }
-                }
-                debug($url);
+                debug($patient);
                 
             }
         }

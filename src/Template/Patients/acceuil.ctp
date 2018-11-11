@@ -1,3 +1,12 @@
+<script>
+    function doDate()
+    {
+        var now = new Date();
+        if( true ) {
+            document.location.href="/cabinet/users/sendmail";
+        }
+    }
+</script>
 <?php $this->layout='acceuil';?>
 <?php $this->start('script')?>
 <?php  ?>
@@ -157,12 +166,13 @@
         <div class="container">
             <div class="row">
                     <div class="header-inner">
-                        <h1><a href="index.html"> <img src="/cabinet/img/souka1.jpg" class="img-rounded" alt="Cinque Terre" width="30" height="30"> <?=$data['prenom']?>  <span><?=$data['nom']?> </span></a></h1>
+                        <h1><a href="#"> <img src="<?= $data['photo'] ?>" class="img-rounded" alt="Cinque Terre" width="40" height="45"> <?=$data['prenom']?>  <span><?=$data['nom']?> </span></a></h1>
                             <nav role="navigation">
                                     <ul>
                                         <li><a href="#" class="active" onclick="agenda()">Agenda </a></li>
                                         <li><a href="#" onclick="profile()">Mon profile </a></li>
                                         <li ><a href="#" onclick="dossier()">Mon dossier </a></li>
+                                        <li ><a href="#" onclick="doDate()">essaie email</a></li>
                                         <li class="cta"><?= $this->Html->link('log out',['action'=>'index']) ?></li>
                                         <li><a href="#"> </a></li>
                                     </ul>
