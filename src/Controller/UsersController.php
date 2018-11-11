@@ -92,7 +92,31 @@ class UsersController extends AppController
      */
     public function edit($id = null)
     {
-        $user = $this->Users->get($id, [
+        $user = $this->Users->get($this->request->query['id'], [
+            'contain' => []
+        ]);
+        $this->request->data['mail']=$this->request->session()->read('Auth.User.mail');
+        $this->request->data['password']=$this->request->query['pass'];
+        $user1 = $this->Auth->identify();
+        if($user1){
+            $this->request->data['mail']=$this->request->query['mail'];
+            $this->request->data['password']=$this->request->query['pass_nv'];
+            $user = $this->Users->patchEntity($user, $this->request->getData());
+            if ($this->Users->save($user)) {
+                $this->Flash->success(__('The user has been saved. veuiller cous reconnecter'));
+                return $this->redirect($this->Auth->redirectUrl(['controller'=>'patients','action'=>'index']));
+            }
+            $this->Flash->error(__('The user could not be saved. Please, try again.'));
+        }else{
+            $this->Flash->error(__('lancien mdp est incorect.'));
+            return $this->redirect($this->referer());
+        }
+        debug($user);
+        debug($this->Auth);
+        /*if($this->request->query[]){
+
+        }*/
+        /*$user = $this->Users->get($id, [
             'contain' => []
         ]);
         if ($this->request->is(['patch', 'post', 'put'])) {
@@ -104,7 +128,7 @@ class UsersController extends AppController
             }
             $this->Flash->error(__('The user could not be saved. Please, try again.'));
         }
-        $this->set(compact('user'));
+        $this->set(compact('user'));*/
     }
 
     /**
@@ -156,6 +180,10 @@ class UsersController extends AppController
             $this->Flash->error('Votre username ou mot de passe est incorrect.');
         return $this->redirect($this->referer());
         
+    }
+    public function logout(){
+        $this->Flash->success('Vous êtes maintenant déconnecté.');
+        return $this->redirect($this->Auth->redirectUrl(['controller'=>'patients','action'=>'index']));
     }
 
     public function sendmail() {

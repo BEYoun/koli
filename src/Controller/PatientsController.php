@@ -102,7 +102,15 @@ class PatientsController extends AppController
                 if ($this->Patients->save($patient)) {
                     $this->Flash->success(__('The patient has been saved.'));
 
-                    return $this->redirect($this->referer());
+                    return $this->redirect($this->Auth->redirectUrl([
+                            'controller'=>'users',
+                            'action'=>'edit',
+                            '?'=>[
+                                'id'=>$this->request->data['users_id'],
+                                'mail'=>$this->request->data['mail'],
+                                'pass'=>$this->request->data['password'],
+                                'pass_nv'=>$this->request->data['password_nv']
+                            ]]));
                 }
                 debug($patients);
             }else{
@@ -116,15 +124,23 @@ class PatientsController extends AppController
                     if ($this->Patients->save($patient)) {
                         $this->Flash->success(__('The patient has been saved.'));
 
-                        return $this->redirect($this->referer());
+                        return $this->redirect($this->Auth->redirectUrl([
+                            'controller'=>'users',
+                            'action'=>'edit',
+                            '?'=>[
+                                'id'=>$this->request->data['users_id'],
+                                'mail'=>$this->request->data['mail'],
+                                'pass'=>$this->request->data['password'],
+                                'pass_nv'=>$this->request->data['password_nv']
+                            ]]));
                     }
                 }
                 debug($patient);
                 
             }
+            debug($this->request->data);
+            die();
         }
-        debug($this->request);
-        die();
         /*if ($this->request->is(['patch', 'post', 'put'])) {
             $patient = $this->Patients->patchEntity($patient, $this->request->getData());
             if ($this->Patients->save($patient)) {

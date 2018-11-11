@@ -8,6 +8,7 @@
     }
 </script>
 <?php $this->layout='acceuil';?>
+<?php $this->request;?>
 <?php $this->start('script')?>
 <?php  ?>
 <script>
@@ -173,16 +174,21 @@
                                         <li><a href="#" onclick="profile()">Mon profile </a></li>
                                         <li ><a href="#" onclick="dossier()">Mon dossier </a></li>
                                         <li ><a href="#" onclick="doDate()">essaie email</a></li>
-                                        <li class="cta"><?= $this->Html->link('log out',['action'=>'index']) ?></li>
+                                        <li class="cta"><?= $this->Html->link('log out',['controller'=>'users','action'=>'logout']) ?></li>
                                         <li><a href="#"> </a></li>
                                     </ul>
                             </nav>
                     </div>
             </div>
+              <dir style="color: red;">
+                <?= $this->Flash->render() ?>
+              </dir>
         </div>
     </header>
 <div id="agenda" style="display: block;">
+
   <br>
+    
     <div id='wrap'>
         <div id='calendar'></div>
         <div style='clear:both'></div>
@@ -494,7 +500,7 @@ span.psw {
                                       <div  style="margin-top:1%" class="col-xs-6">
 
                                           
-                                           <?php echo $this->Form->input('password_nv',['type'=>'password','label'=>'new mdp','class'=>'form-control','title'=>'enter your password.','name'=>'password','id'=>'password']); ?>
+                                           <?php echo $this->Form->input('password_nv',['type'=>'password','label'=>'new mdp','class'=>'form-control','title'=>'enter your password.','name'=>'password_nv','id'=>'password']); ?>
                                       </div>
                                   </div>
                                   <div class="form-group">

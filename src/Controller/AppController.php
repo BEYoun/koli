@@ -60,7 +60,7 @@ class AppController extends Controller
             
             'unauthorizedRedirect' => $this->referer()
         ]);
-        $this->Auth->allow(['display','add']);
+        $this->Auth->allow(['display','add','logout']);
 
         $this->loadComponent('Flash');
 

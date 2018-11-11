@@ -425,17 +425,17 @@
     function RDV(){
         document.getElementById("RDV").style.display = "block";  
         document.getElementById("paiment").style.display = "none";  
-        document.getElementsByClassName("p").style.display = "none";  
+        document.getElementById("dossier").style.display = "none";  
     }
     function paiment(){
         document.getElementById("RDV").style.display = "none";  
         document.getElementById("paiment").style.display = "block";  
-        document.getElementsByClassName("p").style.display = "none";
+        document.getElementById("dossier").style.display = "none";
     }
     function dossier(){
         document.getElementById("RDV").style.display = "none";  
         document.getElementById("paiment").style.display = "none";  
-        document.getElementsByClassName("p").style.display = "block";
+        document.getElementById("dossier").style.display = "block";
     }
     </script>
 <?php $this->end()?>
@@ -459,7 +459,7 @@
                     <li><a href="#"class="active" onclick="RDV()"><i class="fa fa-calendar-alt"></i>Les RDVS</a></li>
                     <li><a href="#" onclick="dossier()"><i class="fa fa-credit-card"></i>Dossiers des patients</a></li>
                     <li><a href="#" onclick="paiment()"><i class="fa fa-database fa-fw"></i>Les recettes</a></li>
-                    <li><a href="#"><i class="fa fa-eject fa-fw"></i>Se deconnecter</a></li>
+                    <li><a href="#"><i class="fa fa-eject fa-fw"></i><?= $this->Html->link('Se Deconecter',['controller'=>'users','action'=>'logout']) ?></a></li>
                 </ul>  
             </nav>
         </div>
@@ -478,39 +478,7 @@
                 </div>
             </div>
             
-                <div class="p" style="display: none;">
-                    <div style="background-color:white ;padding:50px 10px 80px 50px;" class="container">
-                        <div class="navbar navbar-expand-sm bg-dark navbar-dark centered">
-                            <form class="form-inline">
-                                <input class="form-control mr-sm-2" type="text" placeholder="Rechercher">
-                                <button class="btn btn-dark" type="submit">Rechercher</button>
-                            </form>
-                        </div>
-                        <table class="table" style="width:80%">
-                            <thead>
-                              <tr class="table-primary">
-                                <th>Date de visite </th>
-                                <th>Ordonance</th>
-                                <th>Analyse </th>
-                                <th>Remarques </th>
-                              </tr>
-                            </thead>
-                            <tbody>
-                            <tr >
-                                <td>20/05/1994</td>
-                                <td><p>5 midico 54 5 midico 94</p>  <button type="button" class="btn btn-info">Imprimer </button> </td>
-                                <td><p>alpha 54</p> <button type="button" class="btn btn-info">Imprimer </button>
-                                 <button type="button" class="btn btn-danger">Importer </button></td>
-                                <td>Mola7ada</td>
-                            </tr>
-                            
-                            </tbody>
-                          </table>
-
-                    </div>
-                                    
-
-                </div>
+                
  
             <div id="RDV" style="display: block">
                 <div class="templatemo-content-container">         
@@ -525,54 +493,79 @@
             </div>
 
             <div id="paiment" style="display: none">
-                 <div class="templatemo-content-container" >         
-          <div class="templatemo-content-widget white-bg" style="box-shadow:10px 20px 20px #C3C3C3">
-            <div class="container contact-form" >
-            <div class="contact-image">
-                <img src="https://image.ibb.co/kUagtU/rocket_contact.png" alt="rocket_contact"/>
-            </div>
-            <form method="post" >
-                <h1>Paiement des patients</h1>
-               <div class="row">
-                    <div class="col-md-8">
-                        <div class="form-group">
-                            <label for="inputPrenom">Nom</label>
-                            <input type="text" class="form-control" id="inputNom" placeholder="Nom"  />
-                        </div>
-                        <div class="form-group">
-                            <label for="inputPrenom">Prenom</label>
-                            <input type="text" class="form-control" id="inputPrenom"  placeholder="Prenom" />
-                        </div>
-                        <div class="form-group">
-                            <label for="inputPrenom">CIN</label>
-                            <input type="text" class="form-control" id="inputCIN" placeholder="CIN" />
-                        </div>
-                        <div class="form-group">
-                            <label for="inputDate">Date</label>
-                            <input type="date" class="form-control" id="inputDate">
-                        </div>
-                        <div class="dropdown form-group">
-                            <button class="btn btn-basic dropdown-toggle" type="button" data-toggle="dropdown" style="color: black">Montant
-                            <span class="caret"></span></button>
-                             <ul class="dropdown-menu">
-                             <li><a href="#">espèce</a></li>
-                             <li><a href="#">chèque</a></li>
-                             </ul>
-                        </div>
-                            
-                        </div>
-                        <div class="form-group">
-                            <input type="submit" name="btnSubmit" class="btnContact" value="Enregistrer" />
-                           </div>
-                    </div>
+                <div class="templatemo-content-container" >         
+                    <div class="templatemo-content-widget white-bg" style="box-shadow:10px 20px 20px #C3C3C3">
+                        <div class="container contact-form" >
+                            <div class="contact-image">
+                                <img src="https://image.ibb.co/kUagtU/rocket_contact.png" alt="rocket_contact"/>
+                            </div>
+                                <form method="post" >
+                                    <h1>Paiement des patients</h1>
+                                    <div class="row">
+                                        <div class="col-md-8">
+                                            <div class="form-group">
+                                                <label for="inputPrenom">Nom</label>
+                                                <input type="text" class="form-control" id="inputNom" placeholder="Nom"  />
+                                            </div>
+                                            <div class="form-group">
+                                                <label for="inputPrenom">Prenom</label>
+                                                <input type="text" class="form-control" id="inputPrenom"  placeholder="Prenom" />
+                                            </div>
+                                            <div class="form-group">
+                                                <label for="inputPrenom">CIN</label>
+                                                <input type="text" class="form-control" id="inputCIN" placeholder="CIN" />
+                                            </div>
+                                            <div class="form-group">
+                                                <label for="inputDate">Date</label>
+                                                <input type="date" class="form-control" id="inputDate">
+                                            </div>
+                                            <div class="dropdown form-group">
+                                                <button class="btn btn-basic dropdown-toggle" type="button" data-toggle="dropdown" style="color: black">Montant
+                                                <span class="caret"></span></button>
+                                                 <ul class="dropdown-menu">
+                                                 <li><a href="#">espèce</a></li>
+                                                 <li><a href="#">chèque</a></li>
+                                                 </ul>
+                                            </div>
+                                    
+                                        </div>
+                                        <div class="form-group">
+                                            <input type="submit" name="btnSubmit" class="btnContact" value="Enregistrer" />
+                                        </div>
+                                    </div>
+                                </form>        
                     
+                        </div>
+            
+                    </div>
+
+
                 </div>
-            </form>
+            </div>
+            <div id="dossier" style="display: none;">
+  <br>
+    <section style="padding-top: 100px" class="container">
+    <table class="table">
+        <thead >
+          <tr class="table-primary">
+            <th style="text-align: center;">Date de visite </th>
+            <th style="text-align: center;">Ordonance</th>
+            <th style="text-align: center;">Analyse </th>
+            <th style="text-align: center;">Remarques </th>
+          </tr>
+        </thead>
+        <tbody>
+        <tr >
+            <td>20/05/1994</td>
+            <td>5 midico 54 5 midico 94 <br> <button type="button" class="btn btn-info" style="width: 150Px">Imprimer </button> </td>
+            <td><p>alpha 54</p> <button type="button" class="btn btn-info" style="width: 150Px">Imprimer </button></td>
+            <td>Mola7ada</td>
+        </tr>
+        </tbody>
+      </table>
+    </section>
 </div>
 
-
-             </div>
-            </div>
                 <footer class="text-right">
                     <p>Copyright &copy; 2084 Company Name 
                     | Designed by <a href="http://www.templatemo.com" target="_parent">templatemo</a></p>

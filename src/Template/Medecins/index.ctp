@@ -361,7 +361,7 @@ span.psw {
 
             <li><a href="#"><i class="fa fa-bar-chart fa-fw"></i>Les recettes</a></li>
             
-            <li><a href="#"><i class="fa fa-eject fa-fw"></i>Se déconnecter</a></li>
+            <li><i class="fa fa-eject fa-fw"></i><?= $this->Html->link('Se deconnecter',['controller'=>'users','action'=>'logout']) ?></li>
           </ul>  
         </nav>
       </div>
